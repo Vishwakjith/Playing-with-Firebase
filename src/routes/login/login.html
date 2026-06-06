@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+  <input type="email" placeholder="Email" formControlName="email" />
+  <input type="password" placeholder="Password" formControlName="password" />
+  <button type="button" (click)="login()">Login</button>
+  <button type="button" (click)="signUp()">Sign Up</button>
+	
+	@if (helperMessage()) {
+		<p class="error">{{ helperMessage() }}</p>
+	}
+</form>
