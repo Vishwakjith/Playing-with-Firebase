@@ -3,7 +3,7 @@ import { CanMatchFn, GuardResult, MaybeAsync, Router } from '@angular/router';
 
 import { Firebase } from '../services/firebase';
 
-export const authGuard: CanMatchFn = (): MaybeAsync<GuardResult> => {
+export const authGuard: CanMatchFn = () => {
   const firebase = inject(Firebase);
   const router = inject(Router);
 

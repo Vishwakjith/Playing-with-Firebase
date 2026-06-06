@@ -9,7 +9,7 @@ export const routes: Routes = [
     },
     {
         path: '',
-        children: [],
+        loadComponent: () => import('../routes/crud/crud').then(c => c.Crud),
         canMatch: [authGuard],
     },
     {

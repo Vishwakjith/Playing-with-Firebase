@@ -1,9 +1,10 @@
-import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
+import { Component, computed, inject, linkedSignal, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Firebase } from '../../services/firebase';
 import { FirebaseError } from 'firebase/app';
 import { Router } from '@angular/router';
+import { browserSessionPersistence } from 'firebase/auth';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit {
   public readonly form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
@@ -22,6 +23,16 @@ export class Login {
   private readonly router = inject(Router);
 
   private errorMessage = signal<string>('');
+
+  public ngOnInit(): void {
+    this.firebaseApp.setPersistence(browserSessionPersistence)
+    .then(() => {
+      console.log('set')
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }
 
   public async login(): Promise<void> {
     this.handleFormInput();
