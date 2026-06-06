@@ -1,0 +1,20 @@
+<p>crud works!</p>
+
+<button (click)="createSomething()">Create</button>
+<button (click)="readSomething()">Read</button>
+
+<table border="4 solid">
+    <tr> 
+        <th> Random </th>
+        <th> Update Random </th>
+        <th> Delete </th>
+    </tr>
+    @for (item of showDocsData(); track $index) {
+        <tr>
+            <td>{{ item.random }}</td>
+            <td (click)="updateSomething(item.docId)" style="cursor: pointer;"> will update the random </td>
+            <td (click)="deleteSomething(item.docId)" style="cursor: pointer;"> Delete </td>
+        </tr>
+    }
+</table>
+
